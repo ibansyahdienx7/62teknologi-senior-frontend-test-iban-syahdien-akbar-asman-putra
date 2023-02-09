@@ -6,7 +6,7 @@
         <center>
             <a href="https://www.62teknologi.com/" target="_blank">
                 <center>
-                    <img src="https://www.62teknologi.com/images/logo.png" width="200" alt="62 Teknologi" title="62 Teknologi" style='border-radius: 50% !important'>
+                    <img src="https://images.glints.com/unsafe/180x0/glints-dashboard.s3.amazonaws.com/company-logo/761c0054fe0a5839a8d0af7330eaf367.jpg" width="200" alt="62 Teknologi" title="62 Teknologi" style='border-radius: 50% !important'>
                 </center>
             </a>
         </center>
