@@ -71,7 +71,7 @@ export function DashboardNavbar() {
         </div>
         <div className="flex items-center">
           <div className="mr-auto md:mr-4 md:w-56">
-            <Input label="Type here" />
+            <Input label="Search" autoComplete="off" required />
           </div>
           <IconButton
             variant="text"
@@ -80,13 +80,6 @@ export function DashboardNavbar() {
             onClick={() => setOpenSidenav(dispatch, !openSidenav)}
           >
             <Bars3Icon strokeWidth={3} className="h-6 w-6 text-blue-gray-500" />
-          </IconButton>
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            onClick={() => setOpenConfigurator(dispatch, true)}
-          >
-            <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
           </IconButton>
         </div>
       </div>

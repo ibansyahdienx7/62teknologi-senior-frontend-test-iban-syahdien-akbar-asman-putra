@@ -10,8 +10,10 @@ import {
 } from "@material-tailwind/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { authorsTableData, projectsTableData } from "@/data";
+import useDocumentTitle from "@/components/useDocumentTitle";
 
 export function Tables() {
+  useDocumentTitle("Table Business | 62 Teknologi Senior Frontend Developer - Test");
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
@@ -42,11 +44,10 @@ export function Tables() {
             <tbody>
               {authorsTableData.map(
                 ({ img, name, email, job, online, date }, key) => {
-                  const className = `py-3 px-5 ${
-                    key === authorsTableData.length - 1
-                      ? ""
-                      : "border-b border-blue-gray-50"
-                  }`;
+                  const className = `py-3 px-5 ${key === authorsTableData.length - 1
+                    ? ""
+                    : "border-b border-blue-gray-50"
+                    }`;
 
                   return (
                     <tr key={name}>
@@ -135,11 +136,10 @@ export function Tables() {
             <tbody>
               {projectsTableData.map(
                 ({ img, name, members, budget, completion }, key) => {
-                  const className = `py-3 px-5 ${
-                    key === projectsTableData.length - 1
-                      ? ""
-                      : "border-b border-blue-gray-50"
-                  }`;
+                  const className = `py-3 px-5 ${key === projectsTableData.length - 1
+                    ? ""
+                    : "border-b border-blue-gray-50"
+                    }`;
 
                   return (
                     <tr key={name}>
@@ -163,9 +163,8 @@ export function Tables() {
                               alt={name}
                               size="xs"
                               variant="circular"
-                              className={`cursor-pointer border-2 border-white ${
-                                key === 0 ? "" : "-ml-2.5"
-                              }`}
+                              className={`cursor-pointer border-2 border-white ${key === 0 ? "" : "-ml-2.5"
+                                }`}
                             />
                           </Tooltip>
                         ))}
