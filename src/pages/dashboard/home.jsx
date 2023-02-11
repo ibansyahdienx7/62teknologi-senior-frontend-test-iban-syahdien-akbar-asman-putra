@@ -17,7 +17,7 @@ import useDocumentTitle from "@/components/useDocumentTitle";
 import ApiProfileIban from "@/api/Iban/ProfileIban";
 import ApiProfileCard from "@/api/Iban/ProfileCardIban";
 
-export function Home() {
+export function Home(props) {
   useDocumentTitle('Home | 62 Teknologi Senior Frontend Developer - Test');
 
   return (
