@@ -1,8 +1,9 @@
 import {
   HomeIcon,
+  StarIcon,
   TableCellsIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Tables } from "@/pages/dashboard";
+import { Home, ListBusiness } from "@/pages/dashboard";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -14,15 +15,15 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "Home",
+        name: "home",
         path: "/home",
         element: <Home />,
       },
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "tables",
-        path: "/tables",
-        element: <Tables />,
+        name: "list business",
+        path: "/list",
+        element: <ListBusiness />,
       },
     ],
   },

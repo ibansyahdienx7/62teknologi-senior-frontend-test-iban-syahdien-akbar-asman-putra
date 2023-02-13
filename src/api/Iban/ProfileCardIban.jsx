@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ProfileInfoCard } from "@/widgets/cards";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 export default function ApiProfileCard() {
     const UrlIban = "https://api-ibans.pesanin.com";
     const [postCard, setPostProfileCard] = useState("");
+    const [isLoaded, setIsLoaded] = useState(true);
     // TOKEN //
     const fetchData = () => {
         const bodyFormData = {
@@ -22,6 +24,7 @@ export default function ApiProfileCard() {
         };
         fetch(`${UrlIban}/v1/token/challange`, requestOptionsToken)
             .then(async responseToken => {
+                setIsLoaded(false);
                 const isJsonToken = responseToken.headers.get('content-type')?.includes('application/json');
                 const dataToken = isJsonToken && await responseToken.json();
 
@@ -47,6 +50,7 @@ export default function ApiProfileCard() {
                 };
                 fetch(`${UrlIban}/v1/auth/profile`, requestOptionsUser)
                     .then(async responseUser => {
+                        setIsLoaded(false);
                         const isJsonUser = responseUser.headers.get('content-type')?.includes('application/json');
                         const dataUser = isJsonUser && await responseUser.json();
 
@@ -73,6 +77,7 @@ export default function ApiProfileCard() {
                         };
                         fetch(`${UrlIban}/v1/profile/list`, requestOptionsProfileCard)
                             .then(async responseProfileCard => {
+                                setIsLoaded(false);
                                 const isJsonProfileCard = responseProfileCard.headers.get('content-type')?.includes('application/json');
                                 const dataProfileCard = isJsonProfileCard && await responseProfileCard.json();
 
@@ -128,12 +133,17 @@ export default function ApiProfileCard() {
     }
 
     useEffect(() => {
-        fetchData()
+        setTimeout(() => {
+            setIsLoaded(false);
+            fetchData()
+        }, 2000)
     }, [])
+
+    const loadedAbout = <Skeleton variant="rounded" animation="pulse">{postCard}</Skeleton>;
 
     return (
         <>
-            {postCard}
+            {isLoaded ? loadedAbout : postCard}
         </>
     );
 }
