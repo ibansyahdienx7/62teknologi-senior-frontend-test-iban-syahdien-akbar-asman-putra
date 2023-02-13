@@ -89,7 +89,7 @@ const Table = props => {
                                             <div className="carousel-inner relative h-56 overflow-hidden rounded-lg md:h-96">
                                                 {dataSlider.map((dataSlider) => (
                                                     <div id={`carousel-item-${dataSlider.id_slider}`} key={dataSlider.photo} className={`carousel-item ${dataSlider.id_slider == 1 ? 'active' : ''} duration-200 ease-linear`} data-carousel-item={dataSlider.id_slider == 1 ? 'active' : ''}>
-                                                        <img src={dataSlider[0].photo} alt={dataZ.data.name} title={dataZ.data.name} className={"shadow-lg shadow-blue-gray-500/40 absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"} />
+                                                        <img src={dataSlider.photo} alt={dataZ.data.name} title={dataZ.data.name} className={"shadow-lg shadow-blue-gray-500/40 absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"} />
                                                     </div>
                                                 ))}
                                             </div>
