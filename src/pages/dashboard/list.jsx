@@ -7,17 +7,9 @@ import {
 import useDocumentTitle from "@/components/useDocumentTitle";
 import React from "react";
 import DataBisnis from "@/data/dataListBusiness";
-import { useLocation } from "react-router-dom";
 
 export function ListBusiness() {
-
-  const { pathname } = useLocation();
-  const [page] = pathname.split("/").filter((el) => el !== "");
-  if (page == 'list') {
-    useDocumentTitle("List Business | 62 Teknologi Senior Frontend Developer - Test");
-  } else {
-    useDocumentTitle("Search | 62 Teknologi Senior Frontend Developer - Test");
-  }
+  useDocumentTitle("List Business | 62 Teknologi Senior Frontend Developer - Test");
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12 w-100">
       <Card>

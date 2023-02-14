@@ -5,7 +5,7 @@ import FilterComponent from "@/components/FilterComponent";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Link } from "react-router-dom";
-import { Carousel } from "flowbite";
+import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
 
 const Table = props => {
     const MySwal = withReactContent(Swal);
@@ -14,6 +14,7 @@ const Table = props => {
     const [columns, setColumns] = useState([]);
     const [detail, setDetail] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [activeMarker, setActiveMarker] = useState(null);
 
     function fetchDatas(alias) {
         const UrlYelp = "https://api-ibans.pesanin.com/v1/yelp/match";
@@ -58,6 +59,37 @@ const Table = props => {
                     const myObjSlider = JSON.parse(JsonDataSlider);
                     dataSlider.push(myObjSlider);
                 }
+
+                const containerStyle = {
+                    width: '400px',
+                    height: '400px',
+                    borderRadius: '10%'
+                };
+
+                const center = {
+                    lat: dataZ.data.coordinates.latitude,
+                    lng: dataZ.data.coordinates.longitude
+                };
+
+                const markers = [
+                    {
+                        id: 1,
+                        name: dataZ.data.name,
+                        position: center
+                    }
+                ];
+                const handleActiveMarker = (marker) => {
+                    if (marker === activeMarker) {
+                        return;
+                    }
+                    setActiveMarker(marker);
+                };
+
+                const handleOnLoad = (map) => {
+                    const bounds = new google.maps.LatLngBounds();
+                    markers.forEach(({ position }) => bounds.extend(position));
+                    map.fitBounds(bounds);
+                };
 
                 setDetail(
                     <>
@@ -144,6 +176,38 @@ const Table = props => {
                                                         <dt className="text-sm font-medium text-gray-500">Location</dt>
                                                         <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                                             {dataZ.data.location.display_address}
+                                                        </dd>
+                                                    </div>
+                                                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                                        <dt className="text-sm font-medium text-gray-500">Maps</dt>
+                                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div style={{ width: '100%' }}>
+                                                                <LoadScript
+                                                                    googleMapsApiKey="AIzaSyDdLwrkfOQNzH5Yk6yE-QiegJisSMbXzf8"
+                                                                >
+                                                                    <GoogleMap
+                                                                        id="marker-example"
+                                                                        mapContainerStyle={containerStyle}
+                                                                        center={center}
+                                                                        zoom={15}
+                                                                        onClick={() => setActiveMarker(null)}
+                                                                    >
+                                                                        {markers.map(({ id, name, position }) => (
+                                                                            <Marker
+                                                                                key={id}
+                                                                                position={position}
+                                                                                onClick={() => handleActiveMarker(id)}
+                                                                            >
+                                                                                {activeMarker === id ? (
+                                                                                    <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                                                                                        <div>{name}</div>
+                                                                                    </InfoWindow>
+                                                                                ) : null}
+                                                                            </Marker>
+                                                                        ))}
+                                                                    </GoogleMap>
+                                                                </LoadScript>
+                                                            </div>
                                                         </dd>
                                                     </div>
                                                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

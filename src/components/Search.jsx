@@ -17,7 +17,7 @@ export function Search() {
     function handleKeyDown(event) {
         if (event.key === 'Enter') {
             var searchQuery = postSearch;
-            setUpdated(window.location.href = "/search/" + searchQuery);
+            setUpdated(window.open("https://youtube.com/results?search_query=" + searchQuery));
         }
     }
 
@@ -31,14 +31,14 @@ export function Search() {
             })
         } else {
             document.getElementById('searching').value = '';
-            window.location.href = "/search?q=" + searchQuery;
+            window.open("https://youtube.com/results?search_query=" + searchQuery);
         }
     }
 
     return (
         <>
             <div className="flex items-center">
-                <div className="mr-4 md:mr-2 md:w-56">
+                <div className="mr-4 md:mr-4 md:w-56">
                     <Input label="Search" type={"search"} autoComplete="off" id="searching" onKeyUp={handleInputChanged} onKeyDown={handleKeyDown} required />
                 </div>
                 <button onClick={handleButtonClicked} className="w-auto h-auto">
